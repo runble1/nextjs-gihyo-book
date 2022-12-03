@@ -6,11 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src",
-    "format": "next lint --fix --dir src",
+    "lint": "run-p -l -c --aggregate-output lint:*",
+    "lint:eslint": "next lint",
+    "lint:prettier": "prettier --check .",
+    "format": "run-s format:prettier format:eslint",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:prettier": "yarn lint:prettier --write",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
